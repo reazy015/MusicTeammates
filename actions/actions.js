@@ -6,6 +6,4 @@ const actions = {
 			instrument
 		}
 	}
-};
-
-export default actions
+}

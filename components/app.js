@@ -1,13 +1,18 @@
 import React from 'react';
-import TeammateList from './teammate-list';
+import Menu from './Menu';
 
 export default class App extends React.Component {	
 	render(){
 
 		
 		return(
-				<div>
-					<TeammateList/>
+				<div className='container'>
+					<div className='row'>
+						<Menu/>
+					</div>
+					<div className='row'>
+						{this.props.children}
+					</div>					
 				</div>
 
 			)

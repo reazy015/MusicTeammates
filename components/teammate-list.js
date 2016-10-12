@@ -17,6 +17,7 @@ class TeammateList extends React.Component {
 								<th>Instrument</th>
 								<th>City</th>
 								<th>About</th>
+								<th>Invite</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -27,6 +28,7 @@ class TeammateList extends React.Component {
 							})}
 						</tbody>
 					</Table>
+
 					<TeammateInvite/>
 				</div>
 				

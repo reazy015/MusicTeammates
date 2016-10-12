@@ -8,9 +8,9 @@ class TeammateInvite extends React.Component {
 
 		return(
 				<Modal>
-					<Modal.Header>
+					<Modal.Header show={this.props.modal_invite.show}>
 						<Modal.Title>
-							Send Invite to <strong>this</strong> TeamMate?
+							Send Invite to <strong>{this.props.modal_invite.name}</strong> TeamMate?
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Footer>

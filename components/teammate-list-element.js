@@ -41,13 +41,9 @@ class TeammateListElement extends React.Component {
 	teammateInviteShow(event)
 		{
 			const teammate_id = Number(event.target.dataset.id);
-			const name = event.target.dataset.name;
+			const teammate_name = event.target.dataset.name;
 
-				this.props.dispatch({
-					type: "TEAMMATE_INVITE_SHOW",
-					id: teammate_id,
-					name: teammates.first,
-				});
+			console.log(teammate_id, teammate_name);
 		}
 }
 

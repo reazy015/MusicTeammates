@@ -7,7 +7,10 @@ module.exports = {
 		path: './',
 		filename: 'index.js'
 	},
-	
+	devServer: {
+		inline: true,
+		port: 3333
+	},
 	module: {
 
     			preLoaders: [ 

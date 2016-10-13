@@ -19,7 +19,7 @@ export default class TeammateEditName extends React.Component
             <FormGroup >
                 <Col sm={2}>Username</Col>
                 <Col sm={8}>
-                    <FormControl id="username" type="text" placeholder="Username"/>
+                    <FormControl  id="username" type="text" placeholder="Username"/>
                     <FormControl.Feedback/>
                     <HelpBlock></HelpBlock>
                 </Col>

@@ -11,14 +11,17 @@ import TeammateEditName from '../components/teammate-name';
 
 
 class UserAdd extends React.Component {
-	
+	constructor(props){
+		super(props);
 
+		this.formSubmit = this.formSubmit.bind(this);
+	}
 	
 	render(){
 		return(
 				<div>
 					<PageHeader>Form add</PageHeader>
-					<Form horizontal>
+					<Form horizontal onSubmit={this.formSubmit}>
 						<Field name="username" component={TeammateEditName}/>
 						<Field name="instrument" component={TeammateEditInstrument}/>
 						<FormGroup>
@@ -31,6 +34,19 @@ class UserAdd extends React.Component {
 			);
 	}
 
+	formSubmit(values){
+
+		console.log('submitting', values.usernmae);
+
+		this.props.dispatch({
+			type: 'ADD_TEAMMATE',
+			id: values.id,
+			username: values.username,
+			instrument: values.instrument,
+		})
+
+		this.props.dispatch(goBack());
+	}
 
 }
 

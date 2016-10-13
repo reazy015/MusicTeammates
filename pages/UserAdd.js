@@ -10,19 +10,15 @@ import TeammateEditName from '../components/teammate-name';
 
 
 
-export default class UserAdd extends React.Component {
-	constructor(props){
-		super(props);
-
-		this.formSubmit = this.formSubmit.bind(this);
-	}
+class UserAdd extends React.Component {
+	
 
 	
 	render(){
 		return(
 				<div>
 					<PageHeader>Form add</PageHeader>
-					<Form horizontal onSubmit={this.props.handleSubmit(this.formSubmit)}>
+					<Form horizontal>
 						<Field name="username" component={TeammateEditName}/>
 						<Field name="instrument" component={TeammateEditInstrument}/>
 						<FormGroup>
@@ -38,5 +34,7 @@ export default class UserAdd extends React.Component {
 
 }
 
-
+export default UserAdd = reduxForm({
+	form: "user_add",	
+})(UserAdd);
 

@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import teammates from './teammates';
-import add from './add';
 
+import InititalData from './initial-state-reducer';
+import ActiveTeammateReducer from './active-teammate-reducer';
+import InviteTeammate from './invite-teammate-reducer';
 
-export const reducers = combineReducers({
+const allReducers = combineReducers({
+	inititalUsers: InititalData,
+	activeTeammate: ActiveTeammateReducer,
+	inviteTeammate: InviteTeammate,
 	routing: routerReducer,
-	teammates: teammates,
-	add: add,
-})
+}); 
+
+export default allReducers;

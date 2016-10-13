@@ -1,14 +1,20 @@
 import React from 'react';
-import AddTeammate from './CardInput';
+import Menu from './Menu';
 
-
-export default class App extends React.Component {
+export default class App extends React.Component {	
 	render(){
-		return	(
-			<div>
-			 	<h1> Find your teammate</h1>
-			 	<AddTeammate />
-			</div>
-			 	);
+
+		
+		return(
+				<div className='container'>
+					<div className='row'>
+						<Menu/>
+					</div>
+					<div className='row'>
+						{this.props.children}
+					</div>									
+				</div>
+
+			)
 	}
 }

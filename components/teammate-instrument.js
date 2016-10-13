@@ -21,7 +21,7 @@ export default class TeammateEditInstrument extends React.Component
                     <InputGroup>
                         <FormControl  id="job" type="text" placeholder="instrument"/>
                         <InputGroup.Addon>
-                            <Glyphicon glyph="briefcase"/>
+                            <Glyphicon glyph=""/>
                         </InputGroup.Addon>
                     </InputGroup>
                 </Col>

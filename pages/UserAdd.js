@@ -10,7 +10,7 @@ import TeammateEditName from '../components/teammate-name';
 
 
 
-class UserAdd extends React.Component {
+export default class UserAdd extends React.Component {
 	constructor(props){
 		super(props);
 
@@ -35,27 +35,8 @@ class UserAdd extends React.Component {
 			);
 	}
 
-	formSubmit(values){
-		console.log("dispatching");
-		this.state.dispatch({
-			type: 'users',
-			id: values.id,
-			username: values.username,
-			intrument: values.instrument,
-		});
-		
-		this.props.dispatch(goBack());
-	}
+
 }
 
-export default UserAdd = reduxForm({
-	form: "user_add",
-	validate: function(values){
-        const errors = {};
-        if (!values.username) {
-            errors.username = 'Username is required';
-        }
-        return errors;
-    },
-})(UserAdd);
+
 

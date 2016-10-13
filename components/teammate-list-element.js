@@ -2,12 +2,14 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+
 class TeammateListElement extends React.Component {
 	constructor(props){
-			super(props);
+		super(props);
 
-			this.teammateInviteShow = this.teammateInviteShow.bind(this);
-		}
+		this.showTeammateInfo = this.showTeammateInfo.bind(this);
+		this.inviteTeammate = this.inviteTeammate.bind(this);
+	}
 
 	render(){
 		
@@ -21,31 +23,42 @@ class TeammateListElement extends React.Component {
 						<td>{teammate.first}</td>
 						<td>{teammate.instrument}</td>
 						<td>{teammate.city}</td>
-						<td>
-							<a href={'/teammate-invite' + teammate.id}>
-								<Button bsSize="xsmall">
+						<td>							
+							<Button bsSize='xsmall' data-id={teammate.id} data-name={teammate.first} onClick={this.showTeammateInfo}>
 								More info
-								</Button>
-							</a>
+							</Button>							
 						</td>
 						<td>
-							<Button  bsSize="xsmall" data-id={teammate.id} data-name={teammate.first} onClick={this.teammateInviteShow}>Invite</Button>
+							<Button  bsSize='xsmall' data-id={teammate.id} data-name={teammate.first} onClick={this.inviteTeammate}>Invite</Button>
 						</td>
 					</tr>
 				
 			);
 	}
 
-	// 
+	showTeammateInfo(event){
 
-	teammateInviteShow(event)
-		{
-			const teammate_id = Number(event.target.dataset.id);
-			const teammate_name = event.target.dataset.name;
+		this.props.dispatch({
+		type: "SHOW_TEAMMATE_INFO",
+		payload: this.props.teammate,
 
-			console.log(teammate_id, teammate_name);
-		}
+		});
+	}
+
+	inviteTeammate(event){
+		const teammate_id = Number(event.target.dataset.id);
+		const teammate_name = event.target.dataset.name;
+
+		console.log(teammate_id, teammate_name);
+
+		this.props.dispatch({
+			type: "SEND_TEAMMATE_INVITE",
+			payload: this.props.teammate,
+
+		});
+	}
 }
+
 
 
 export default connect()(TeammateListElement);

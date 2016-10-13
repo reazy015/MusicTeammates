@@ -1,4 +1,7 @@
+var path = require('path');
+
 module.exports = {
+
 	entry: './main.js',
 	output: {
 		path: './',
@@ -9,6 +12,16 @@ module.exports = {
 		port: 3333
 	},
 	module: {
+
+    			preLoaders: [ 
+    			  {
+    			    test: /\.js$/,
+    			    loaders: ['eslint'],
+    			    include: [
+    			      path.resolve(__dirname, "./"),
+    			    ],
+    			  }
+    			],
 		loaders: [
 					{
 						test: /\.js$/,

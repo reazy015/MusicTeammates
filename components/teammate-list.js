@@ -1,13 +1,17 @@
 import React from 'react';
-import TeammateListElement from './teammate-list-element';
 import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
 
+
+import TeammateListElement from './teammate-list-element';
+import TeammateDetail from './teammate-detail';
 import TeammateInvite from './teammate-invite';
+
 
 class TeammateList extends React.Component {
 	render(){
 		return(
+			<div>
 				<div>
 					<Table bordered hover responsive striped>
 						<thead>
@@ -21,26 +25,28 @@ class TeammateList extends React.Component {
 							</tr>
 						</thead>
 						<tbody>
-							{this.props.teammates.map((teammate, index) => {
+							{this.props.initialUsers.map((teammate, index) => {
 								return (
 										<TeammateListElement key={teammate.id} teammate={teammate}/>
 									)
 							})}
 						</tbody>
-					</Table>
-
-					<TeammateInvite/>
+					</Table>									
 				</div>
-				
+				<div>
+				<TeammateDetail />
+				<TeammateInvite />	
+				</div>
+			</div>
 
 			)
 	}
 }
 
 function mapStateToProps(state){
-	return({
-		teammates: state.teammates
-	});
+	return {
+		initialUsers: state.inititalUsers,
+	}
 }
 
 export default connect(mapStateToProps)(TeammateList)

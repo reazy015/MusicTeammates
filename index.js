@@ -29015,42 +29015,20 @@
 	});
 
 	exports.default = function () {
-		return [{
-			id: 1,
-			first: 'Dave',
-			last: 'Davison',
-			city: 'Los-Angeles',
-			instrument: 'guitar',
-			thumbnail: 'some photo use to be here'
-		}, {
-			id: 2,
-			first: 'Mike',
-			last: 'Miker',
-			city: 'Los-Angeles',
-			instrument: 'guitar',
-			thumbnail: 'some photo use to be here'
-		}, {
-			id: 3,
-			first: 'John',
-			last: 'Johnes',
-			city: 'Los-Angeles',
-			instrument: 'guitar',
-			thumbnail: 'some photo use to be here'
-		}, {
-			id: 4,
-			first: 'Dave',
-			last: 'Jhones',
-			city: 'Los-Angeles',
-			instrument: 'guitar',
-			thumbnail: 'some photo use to be here'
-		}, {
-			id: 5,
-			first: 'Dave',
-			last: 'Jhones',
-			city: 'Los-Angeles',
-			instrument: 'guitar',
-			thumbnail: 'some photo use to be here'
-		}];
+		var users = [];
+
+		for (var i = 1; i < 28; i++) {
+			users.push({
+				id: i,
+				first: 'Dave',
+				last: 'Mayers',
+				city: 'New-York',
+				instrument: 'guitar',
+				thumbnail: ''
+			});
+		}
+
+		return users;
 	};
 
 /***/ },
@@ -29141,6 +29119,11 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'container' },
+					_react2.default.createElement(
+						'h1',
+						{ className: 'slogan' },
+						'Find someone to jam with'
+					),
 					_react2.default.createElement(
 						'div',
 						{ className: 'row' },
@@ -48165,6 +48148,8 @@
 
 	var _reactBootstrap = __webpack_require__(268);
 
+	var _reactRouterRedux = __webpack_require__(250);
+
 	var _teammateListElement = __webpack_require__(523);
 
 	var _teammateListElement2 = _interopRequireDefault(_teammateListElement);
@@ -48188,15 +48173,24 @@
 	var TeammateList = function (_React$Component) {
 		_inherits(TeammateList, _React$Component);
 
-		function TeammateList() {
+		function TeammateList(props) {
 			_classCallCheck(this, TeammateList);
 
-			return _possibleConstructorReturn(this, (TeammateList.__proto__ || Object.getPrototypeOf(TeammateList)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (TeammateList.__proto__ || Object.getPrototypeOf(TeammateList)).call(this, props));
+
+			_this.changePage = _this.changePage.bind(_this);
+			return _this;
 		}
 
 		_createClass(TeammateList, [{
 			key: 'render',
 			value: function render() {
+				var per_page = 10;
+				var pages = Math.ceil(this.props.initialUsers.length / per_page);
+				var current_page = this.props.page;
+				var start_offset = (current_page - 1) * per_page;
+				var start_count = 0;
+
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -48248,10 +48242,14 @@
 								'tbody',
 								null,
 								this.props.initialUsers.map(function (teammate, index) {
-									return _react2.default.createElement(_teammateListElement2.default, { key: teammate.id, teammate: teammate });
+									if (index >= start_offset && start_count < per_page) {
+										start_count++;
+										return _react2.default.createElement(_teammateListElement2.default, { key: teammate.id, teammate: teammate });
+									}
 								})
 							)
-						)
+						),
+						_react2.default.createElement(_reactBootstrap.Pagination, { className: 'users-pagintaion pull-right', bsSize: 'medium', maxButtons: 10, first: true, last: true, next: true, prev: true, boundaryLinks: true, items: pages, activePage: current_page, onSelect: this.changePage })
 					),
 					_react2.default.createElement(
 						'div',
@@ -48261,6 +48259,11 @@
 					)
 				);
 			}
+		}, {
+			key: 'changePage',
+			value: function changePage(page) {
+				this.props.dispatch((0, _reactRouterRedux.push)('/?page=' + page));
+			}
 		}]);
 
 		return TeammateList;
@@ -48268,7 +48271,9 @@
 
 	function mapStateToProps(state) {
 		return {
-			initialUsers: state.inititalUsers
+			initialUsers: state.inititalUsers,
+			page: Number(state.routing.locationBeforeTransitions.query.page) || 1,
+			addTeammate: state.addTeammate
 		};
 	}
 
@@ -48592,10 +48597,13 @@
 	var UserAdd = function (_React$Component) {
 		_inherits(UserAdd, _React$Component);
 
-		function UserAdd() {
+		function UserAdd(props) {
 			_classCallCheck(this, UserAdd);
 
-			return _possibleConstructorReturn(this, (UserAdd.__proto__ || Object.getPrototypeOf(UserAdd)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (UserAdd.__proto__ || Object.getPrototypeOf(UserAdd)).call(this, props));
+
+			_this.formSubmit = _this.formSubmit.bind(_this);
+			return _this;
 		}
 
 		_createClass(UserAdd, [{
@@ -48611,7 +48619,7 @@
 					),
 					_react2.default.createElement(
 						_reactBootstrap.Form,
-						{ horizontal: true },
+						{ horizontal: true, onSubmit: this.formSubmit },
 						_react2.default.createElement(_reduxForm.Field, { name: 'username', component: _teammateName2.default }),
 						_react2.default.createElement(_reduxForm.Field, { name: 'instrument', component: _teammateInstrument2.default }),
 						_react2.default.createElement(
@@ -48629,6 +48637,18 @@
 						)
 					)
 				);
+			}
+		}, {
+			key: 'formSubmit',
+			value: function formSubmit(values) {
+
+				console.log('submitting', values.usernmae);
+
+				this.props.dispatch({
+					type: 'ADD_TEAMMATE'
+				});
+
+				this.props.dispatch((0, _reactRouterRedux.goBack)());
 			}
 		}]);
 

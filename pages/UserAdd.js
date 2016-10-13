@@ -39,10 +39,7 @@ class UserAdd extends React.Component {
 		console.log('submitting', values.usernmae);
 
 		this.props.dispatch({
-			type: 'ADD_TEAMMATE',
-			id: values.id,
-			username: values.username,
-			instrument: values.instrument,
+			type: 'ADD_TEAMMATE',			
 		})
 
 		this.props.dispatch(goBack());

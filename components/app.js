@@ -7,6 +7,7 @@ export default class App extends React.Component {
 		
 		return(
 				<div className='container'>
+					<h1 className="slogan">Find someone to jam with</h1>
 					<div className='row'>
 						<Menu/>
 					</div>
